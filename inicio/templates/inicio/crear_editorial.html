@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title_head %}
+<title>Crear Editorial</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+Crear Editorial
+{% endblock h1_header %}
+
+{% block contenido %}
+
+<p>{{mensajeE}}</p>
+
+<form action="" method="post">
+    {% csrf_token %}
+    <Table>
+        {{formularioE}}
+    </Table>
+    <button>Crear</button>
+</form>
+{% endblock contenido %}
