@@ -1,14 +1,12 @@
-from django.shortcuts import render
-from inicio.forms import CrearAutorFormulario, CrearEditorialFormulario, CrearLibroFormulario
+from inicio.forms import CrearAutorFormulario, CrearEditorialFormulario, CrearLibroFormulario, BusquedaFormulario
 from inicio.models import Libro, Autor, Editorial
-
-
+from django.shortcuts import render
 
 def inicio(request):
     return render(request, 'inicio/inicio.html')
 
 def crear_autor(request):
-    mensaje = ''
+    mensaje = 'El autor se creo correctamente'
     if request.method == 'POST':
         formularioA = CrearAutorFormulario(request.POST)
         if formularioA.is_valid():
@@ -22,7 +20,7 @@ def crear_autor(request):
     return render(request, 'inicio/crear_autor.html', {'formularioA': formularioA, 'mensaje': mensaje})
 
 def crear_editorial(request):
-    mensaje = ''
+    mensaje = 'La editorial se creo correctamente'
     if request.method == 'POST':
         formularioE = CrearEditorialFormulario(request.POST)
         if formularioE.is_valid():
@@ -36,7 +34,7 @@ def crear_editorial(request):
     return render(request, 'inicio/crear_editorial.html', {'formularioE': formularioE, 'mensaje': mensaje})
 
 def crear_libro(request):
-    mensaje = ''
+    mensaje = 'El libro se creo correctamente'
     if request.method == 'POST':
         formularioL = CrearLibroFormulario(request.POST)
         if formularioL.is_valid():
@@ -48,4 +46,14 @@ def crear_libro(request):
             return render(request, 'inicio/crear_libro.html', {'formularioL': formularioL, 'mensajeL': mensajeL})
     formularioL = CrearLibroFormulario()
     return render(request, 'inicio/crear_libro.html', {'formularioL': formularioL, 'mensaje': mensaje})
-    
+
+def lista_libros(request):
+    formularioB = BusquedaFormulario()
+    libros = None
+    if request.method == 'POST':
+        formularioB = BusquedaFormulario(request.POST)
+        if formularioB.is_valid():
+            busqueda = formularioB.cleaned_data['busqueda']
+            libros = Libro.objects.filter(titulo__icontains=busqueda)
+
+    return render(request, 'inicio/lista_libros.html', {'formularioB': formularioB, 'libros': libros})

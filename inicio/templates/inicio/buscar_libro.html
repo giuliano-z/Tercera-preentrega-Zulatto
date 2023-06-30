@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title_head %}
+<title>Busqueda</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+Buscar Libro
+{% endblock h1_header %}
+
+{% block contenido %}
+
+<p>{{mensajeL}}</p>
+
+<form action="" method="post">
+    {% csrf_token %}
+    <Table>
+        {{formularioL}}
+    </Table>
+    <button>Buscar</button>
+</form>
+{% endblock contenido %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title_head %}
+<title>Busqueda</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+Busqueda de Libros
+{% endblock h1_header %}
+
+{% block contenido %}
+
+<form method="POST">
+    {% csrf_token %}
+    {{ formularioB }}
+    <button type="submit">Buscar</button>
+</form>
+
+{% if libros %}
+<h2>Resultados:</h2>
+<ul>
+    {% for libro in libros %}
+    <li>{{ libro.titulo }}</li>
+    {% empty %}
+    <li>No se encontraron libros.</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endblock contenido %}
