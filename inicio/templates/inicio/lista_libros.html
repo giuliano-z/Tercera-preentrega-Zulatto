@@ -10,20 +10,20 @@ Busqueda de Libros
 
 {% block contenido %}
 
-<form method="POST">
-    {% csrf_token %}
-    {{ formularioB }}
+<button>
+    <a class="navbar-brad" href={% url 'inicio:crear_libro' %}>Crear libro</a>
+</button>
+
+<form action="" method="get">
+    {{ formulario }}
     <button type="submit">Buscar</button>
 </form>
 
-{% if libros %}
-<h2>Resultados:</h2>
-<ul>
-    {% for libro in libros %}
-    <li>{{ libro.titulo }}</li>
-    {% empty %}
-    <li>No se encontraron libros.</li>
-    {% endfor %}
-</ul>
-{% endif %}
+{% for libro in libros %}
+<li>Titulo: {{libro.titulo}} - Autor: {{libro.autor}} - Editorial: {{libro.editorial}}</li>
+
+{% empty %}
+<li>No se encontraron libros con ese nombre.</li>
+{% endfor %}
+
 {% endblock contenido %}

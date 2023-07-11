@@ -15,4 +15,4 @@ class CrearLibroFormulario(forms.Form):
     editorial = forms.CharField(max_length=50)
 
 class BusquedaFormulario(forms.Form):
-    busqueda = forms.CharField(max_length=100)
+    titulo = forms.CharField(max_length=100, required=False)
